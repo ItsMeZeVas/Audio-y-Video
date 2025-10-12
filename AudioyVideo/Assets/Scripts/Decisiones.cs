@@ -69,7 +69,7 @@ public class Decisiones : MonoBehaviour
     // Carga la escena correspondiente según la elección del usuario
     void CargarEscena(string nombreEscena)
     {
-        SceneManager.LoadScene(nombreEscena);
+        SceneManager.LoadScene(nombreEscena); 
     }
 }
 
