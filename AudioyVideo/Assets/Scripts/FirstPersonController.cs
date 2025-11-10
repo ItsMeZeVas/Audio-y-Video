@@ -75,8 +75,5 @@ public class FirstPersonController : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log("Colisión con: " + collision.gameObject.name);
-    }
+
 }
