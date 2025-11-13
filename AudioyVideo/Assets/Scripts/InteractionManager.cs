@@ -22,6 +22,9 @@ public class InteractionManager : MonoBehaviour
 
         [Header("Mensaje (opcional)")]
         [TextArea] public string message;
+
+        [Header("Final del juego (opcional)")]
+        public bool isEnding = false; // 🔹 Si esta acción marca el final del juego
     }
 
     [System.Serializable]
@@ -43,6 +46,7 @@ public class InteractionManager : MonoBehaviour
     public GameObject playerObject;
 
     private bool isPlayingVideo = false;
+    private bool shouldQuitAfterVideo = false; // 🔹 Nuevo: indica si se debe cerrar el juego después del video
 
     void Start()
     {
@@ -90,12 +94,24 @@ public class InteractionManager : MonoBehaviour
             }
 
             if (button.playFullscreen)
+            {
+                // Si es final del juego, esperamos a que el video termine para cerrar
+                shouldQuitAfterVideo = button.isEnding;
                 PlayFullscreenVideo(button.videoClip);
+                return; // 🔹 Esperamos al final del video antes de hacer cualquier cierre
+            }
         }
 
         // Mostrar mensaje (si aplica)
         if (!string.IsNullOrEmpty(button.message))
             Debug.Log($"💬 {button.message}");
+
+        // Si es final del juego pero sin video, cerramos inmediatamente
+        if (button.isEnding && button.videoClip == null)
+        {
+            Debug.Log("🏁 Acción marcada como final del juego. Cerrando aplicación...");
+            QuitGame();
+        }
     }
 
     // 🎥 Control del video en pantalla completa
@@ -139,6 +155,24 @@ public class InteractionManager : MonoBehaviour
                         script.enabled = true;
                 }
             }
+
+            // 🔹 Si debe cerrarse después del video
+            if (shouldQuitAfterVideo)
+            {
+                Debug.Log("🎬 Video final terminado. Cerrando el juego...");
+                shouldQuitAfterVideo = false;
+                QuitGame();
+            }
         };
+    }
+
+    // 🔹 Método para cerrar el juego correctamente
+    private void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false; // Detiene el modo Play en el editor
+#else
+        Application.Quit(); // Cierra la aplicación compilada
+#endif
     }
 }
