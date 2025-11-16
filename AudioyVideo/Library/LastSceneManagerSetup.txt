@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Finales/F1 Conocimiento.unity
+- path: Assets/Scenes/Finales/F1Conocimiento.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
