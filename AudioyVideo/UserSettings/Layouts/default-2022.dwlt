@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 1037
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Scene
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 150}
   m_MaxSize: {x: 24288, y: 24288}
   vertical: 0
-  controlID: 136
+  controlID: 138
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -466,10 +466,10 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: a8720000
+      scrollPos: {x: 0, y: 424}
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 66c1ffff5ccaffff3ad3ffffbae2ffff30fbffffa45b0000
+      m_ExpandedIDs: 0aa8fffffab6ffff0ef5ffff1afbffff30fbffff665b0000865c0000965c0000bc5c0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -932,9 +932,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 3681.2598, y: 1399.8169, z: -806.6122}
+    m_Target: {x: 3355.7278, y: 1805.9341, z: -581.2343}
     speed: 2
-    m_Value: {x: 3681.2598, y: 1399.8169, z: -806.6122}
+    m_Value: {x: 3355.7278, y: 1805.9341, z: -581.2343}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -980,13 +980,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.023227582, y: 0.9695692, z: -0.21889476, w: 0.115785815}
+    m_Target: {x: -0.04985021, y: -0.9398143, z: 0.2956756, w: -0.16974594}
     speed: 2
-    m_Value: {x: 0.023205254, y: 0.9686372, z: -0.21868436, w: 0.11567452}
+    m_Value: {x: -0.05005443, y: -0.938444, z: 0.2967924, w: -0.16950405}
   m_Size:
-    m_Target: 775.8045
+    m_Target: 1136.6635
     speed: 2
-    m_Value: 775.8045
+    m_Value: 1136.6635
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1056,7 +1056,7 @@ MonoBehaviour:
     m_SkipHidden: 1
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes/Finales
+    - Assets/Sounds
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1064,16 +1064,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes/Finales
+  - Assets/Sounds
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Usuario\Documents\GITHUB\Audio-y-Video\Audio-y-Video\AudioyVideo
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 157}
-    m_SelectedIDs: da670000
-    m_LastClickedID: 26586
-    m_ExpandedIDs: 000000007467000076670000786700007a6700007c6700007e67000080670000826700008467000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 113}
+    m_SelectedIDs: e0670000
+    m_LastClickedID: 26592
+    m_ExpandedIDs: 0000000076670000786700007a6700007c6700007e6700008067000082670000846700008667000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1101,7 +1101,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000007467000076670000786700007a6700007c6700007e670000806700008267000084670000
+    m_ExpandedIDs: 0000000076670000786700007a6700007c6700007e67000080670000826700008467000086670000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
