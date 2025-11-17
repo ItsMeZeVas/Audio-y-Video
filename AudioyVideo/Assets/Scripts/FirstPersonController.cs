@@ -1,4 +1,4 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class FirstPersonController : MonoBehaviour
@@ -7,9 +7,12 @@ public class FirstPersonController : MonoBehaviour
     public float moveSpeed = 5f;
     public float mouseSensitivity = 2f;
 
-    [Header("Head Bob (movimiento de c·mara)")]
-    public float bobSpeed = 6f;      // Frecuencia del movimiento
-    public float bobAmount = 0.05f;  // Amplitud del movimiento
+    [Header("Head Bob (movimiento de c√°mara)")]
+    public float bobSpeed = 6f;
+    public float bobAmount = 0.05f;
+
+    [Header("Footstep Controller")]
+    public FootstepController footstepController;
 
     private Rigidbody rb;
     private Camera playerCamera;
@@ -17,10 +20,13 @@ public class FirstPersonController : MonoBehaviour
     private float defaultCameraY;
     private float bobTimer = 0f;
 
+    private float previousSin = 0f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true; // Evita volcar el cuerpo
+        rb.freezeRotation = true;
+
         playerCamera = GetComponentInChildren<Camera>();
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -31,7 +37,7 @@ public class FirstPersonController : MonoBehaviour
 
     void Update()
     {
-        // --- RotaciÛn con el ratÛn ---
+        // Rotaci√≥n del mouse
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
@@ -44,7 +50,6 @@ public class FirstPersonController : MonoBehaviour
 
     void FixedUpdate()
     {
-        // --- Movimiento con WASD ---
         float moveX = Input.GetAxis("Horizontal");
         float moveZ = Input.GetAxis("Vertical");
 
@@ -55,25 +60,49 @@ public class FirstPersonController : MonoBehaviour
         Vector3 velocityChange = targetVelocity - new Vector3(velocity.x, 0, velocity.z);
         rb.AddForce(velocityChange, ForceMode.VelocityChange);
 
-        // --- Head Bob ---
         HandleHeadBob(moveDir);
     }
 
     void HandleHeadBob(Vector3 moveDir)
     {
-        if (moveDir.magnitude > 0.1f && rb.velocity.magnitude > 0.5f)
+        float speed = rb.velocity.magnitude;
+        bool isMoving = speed > 1f && moveDir.magnitude > 0.1f;
+
+        // ---- HEAD BOB ----
+        if (isMoving)
         {
             bobTimer += Time.deltaTime * bobSpeed;
-            float newY = defaultCameraY + Mathf.Sin(bobTimer) * bobAmount;
-            playerCamera.transform.localPosition = new Vector3(0, newY, 0);
+
+            float sinValue = Mathf.Sin(bobTimer);
+            float newY = defaultCameraY + sinValue * bobAmount;
+
+            // Cruce por cero hacia abajo ‚Üí paso
+            if (previousSin > 0f && sinValue <= 0f)
+            {
+                if (footstepController != null)
+                    footstepController.PlayFootstep();
+            }
+
+            previousSin = sinValue;
+
+            playerCamera.transform.localPosition =
+                new Vector3(playerCamera.transform.localPosition.x, newY, playerCamera.transform.localPosition.z);
         }
         else
         {
-            bobTimer = 0;
-            Vector3 currentPos = playerCamera.transform.localPosition;
-            playerCamera.transform.localPosition = Vector3.Lerp(currentPos, new Vector3(0, defaultCameraY, 0), Time.deltaTime * 4f);
+            // ---- RESPIRACI√ìN ----
+            float breathingSpeed = 1f;
+            float breathingAmount = 0.02f;
+
+            bobTimer += Time.deltaTime * breathingSpeed;
+
+            float sinValue = Mathf.Sin(bobTimer);
+            float newY = defaultCameraY + sinValue * breathingAmount;
+
+            previousSin = 0; // Se reinicia para no disparar pasos al retomar movimiento
+
+            playerCamera.transform.localPosition =
+                new Vector3(playerCamera.transform.localPosition.x, newY, playerCamera.transform.localPosition.z);
         }
     }
-
-
 }
