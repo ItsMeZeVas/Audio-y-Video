@@ -7,8 +7,28 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Almohada1
+    second: {fileID: 2100000, guid: abfd176a1fd5be44492ebc3789fb7bb2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CORTINAS
+    second: {fileID: 2100000, guid: 63564bb418b970243bcad78f11427b1d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Standard_Surface1
     second: {fileID: 2100000, guid: 2aa3804a3f6e9824dad364fa4a539293, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: cama2
+    second: {fileID: 2100000, guid: 072e5cab36ce903479269a4b3946be78, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: camasebas
+    second: {fileID: 2100000, guid: 1133b33234e49d64fb9fe371ff756a7a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
