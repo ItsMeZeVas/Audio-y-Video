@@ -29,6 +29,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: camasebas
     second: {fileID: 2100000, guid: 1133b33234e49d64fb9fe371ff756a7a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: closet
+    second: {fileID: 2100000, guid: df1cbcbafbc4f95469f51c273494eca3, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
