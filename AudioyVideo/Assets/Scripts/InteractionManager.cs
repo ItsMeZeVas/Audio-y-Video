@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Video;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -31,6 +32,7 @@ public class InteractionManager : MonoBehaviour
 
         [Header("Final del juego (opcional)")]
         public bool isEnding = false;
+        public string endingSceneName = "Creditos";
     }
 
     [System.Serializable]
@@ -52,7 +54,8 @@ public class InteractionManager : MonoBehaviour
     public GameObject playerObject;
 
     private bool isPlayingVideo = false;
-    private bool shouldQuitAfterVideo = false;
+    private bool shouldChangeSceneAfterVideo = false;
+    private string pendingEndingScene = "";
 
     // ⭐ Fade
     [Header("Fade UI (Panel negro con CanvasGroup)")]
@@ -137,7 +140,8 @@ public class InteractionManager : MonoBehaviour
 
             if (button.playFullscreen)
             {
-                shouldQuitAfterVideo = button.isEnding;
+                shouldChangeSceneAfterVideo = button.isEnding;
+                pendingEndingScene = button.endingSceneName;
 
                 // 🎵 Cuando inicia un video → bajar música
                 if (ambientMusic != null)
@@ -154,9 +158,10 @@ public class InteractionManager : MonoBehaviour
         if (button.showNotification && !string.IsNullOrEmpty(button.notificationText))
             ShowNotification(button.notificationText);
 
+        // ⭐ FINAL SIN VIDEO
         if (button.isEnding && button.videoClip == null)
         {
-            QuitGame();
+            ChangeScene(button.endingSceneName);
         }
     }
 
@@ -205,7 +210,7 @@ public class InteractionManager : MonoBehaviour
 
         yield return StartCoroutine(Fade(1f, 0f));
 
-        // Esperar hasta casi el final del video
+        // Esperar hasta casi el final del vídeo
         while (fullscreenVideoPlayer.time < fullscreenVideoPlayer.length - fadeDuration - 0.1f)
             yield return null;
 
@@ -225,9 +230,10 @@ public class InteractionManager : MonoBehaviour
             }
         }
 
-        if (shouldQuitAfterVideo)
+        // ⭐ FINAL CON VIDEO
+        if (shouldChangeSceneAfterVideo)
         {
-            QuitGame();
+            ChangeScene(pendingEndingScene);
             yield break;
         }
 
@@ -315,12 +321,12 @@ public class InteractionManager : MonoBehaviour
     }
 
 
-    private void QuitGame()
+    // ⭐ Cambio de escena
+    private void ChangeScene(string sceneName)
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
+        if (!string.IsNullOrEmpty(sceneName))
+            SceneManager.LoadScene(sceneName);
+        else
+            Debug.LogError("❌ No se asignó un nombre de escena en endingSceneName.");
     }
 }
